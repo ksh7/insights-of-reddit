@@ -1,0 +1,5 @@
+configurationset:
+  - configuration:
+      name: curl_import_config
+      access_control_request_headers_684888c0eb: "*"
+      api_key_8b27f9e992: REPLACE_WITH_MONGODB_API_KEY

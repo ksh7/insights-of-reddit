@@ -1,0 +1,154 @@
+type CommentsEntry {
+  author_fullname: String
+  body: String
+  body_html: String
+  comment_id: String
+  controversiality: Int
+  created_utc: Int
+  downs: Int
+  likes: JSON
+  num_reports: JSON
+  parent_id: String
+  permalink: String
+  replies: [RepliesEntry]
+  score: Int
+  submission: String
+  subreddit: String
+  total_awards_received: Int
+  ups: Int
+}
+
+type DataEntry {
+  approved_at_utc: JSON
+  author: String
+  author_fullname: String
+  banned_at_utc: JSON
+  category: JSON
+  comment_sort: String
+  comments: [CommentsEntry]
+  content_categories: JSON
+  created_utc: Int
+  downs: Int
+  fullname: String
+  hidden: Boolean
+  hide_score: Boolean
+  is_meta: Boolean
+  is_original_content: Boolean
+  is_reddit_media_domain: Boolean
+  is_self: Boolean
+  is_video: Boolean
+  likes: JSON
+  media: JSON
+  media_embed: JSON
+  media_only: Boolean
+  name: String
+  num_comments: Int
+  over_18: Boolean
+  permalink: String
+  pinned: Boolean
+  removed_by: JSON
+  score: Int
+  secure_media: JSON
+  secure_media_embed: JSON
+  selftext: String
+  selftext_html: JSON
+  submission_id: String
+  subreddit: String
+  subreddit_id: String
+  subreddit_name_prefixed: String
+  subreddit_type: String
+  suggested_sort: String
+  thumbnail: String
+  title: String
+  top_awarded_type: JSON
+  total_awards_received: Int
+  treatment_tags: [JSON]
+  ups: Int
+  upvote_ratio: Float
+  url: String
+  view_count: JSON
+}
+
+type RepliesEntry {
+  author_fullname: String
+  body: String
+  body_html: String
+  created_utc: ID
+  downs: ID
+  likes: String
+  parent_id: String
+  permalink: String
+  reply_id: String
+  score: ID
+  submission: String
+  subreddit: String
+  subreddit_id: String
+  total_awards_received: ID
+  ups: ID
+}
+
+type ArticlesList {
+  documents: [DataEntry]
+}
+
+type ArticleDetails {
+  document: DataEntry
+}
+
+type Query {
+  getArticles(collection: String, dataSource: String, database: String, sort: JSON, limit: Int): ArticlesList
+    @rest(
+      method: POST
+      endpoint: "https://data.mongodb-api.com/app/data-jpumu/endpoint/data/v1/action/find"
+      headers: [
+        {
+          name: "access-control-request-headers"
+          value: "$access_control_request_headers_684888c0eb;"
+        }
+        { name: "api-key", value: "$api_key_8b27f9e992;" }
+      ]
+      configuration: "curl_import_config"
+    )
+
+  getArticlesByCategory(collection: String, dataSource: String, database: String, filter: JSON, sort: JSON, limit: Int): ArticlesList
+    @rest(
+      method: POST
+      endpoint: "https://data.mongodb-api.com/app/data-jpumu/endpoint/data/v1/action/find"
+      headers: [
+        {
+          name: "access-control-request-headers"
+          value: "$access_control_request_headers_684888c0eb;"
+        }
+        { name: "api-key", value: "$api_key_8b27f9e992;" }
+      ]
+      configuration: "curl_import_config"
+    )
+
+  getArticleDetailsByID(collection: String, dataSource: String, database: String, filter: JSON): ArticleDetails
+    @rest(
+      method: POST
+      endpoint: "https://data.mongodb-api.com/app/data-jpumu/endpoint/data/v1/action/findOne"
+      headers: [
+        {
+          name: "access-control-request-headers"
+          value: "$access_control_request_headers_684888c0eb;"
+        }
+        { name: "api-key", value: "$api_key_8b27f9e992;" }
+      ]
+      configuration: "curl_import_config"
+    )
+
+  searchArticlesByTitle(collection: String, dataSource: String, database: String, filter: JSON, sort: JSON, limit: Int): ArticlesList
+    @rest(
+      method: POST
+      endpoint: "https://data.mongodb-api.com/app/data-jpumu/endpoint/data/v1/action/find"
+      headers: [
+        {
+          name: "access-control-request-headers"
+          value: "$access_control_request_headers_684888c0eb;"
+        }
+        { name: "api-key", value: "$api_key_8b27f9e992;" }
+      ]
+      configuration: "curl_import_config"
+    )
+}
